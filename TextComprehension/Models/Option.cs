@@ -2,5 +2,7 @@ namespace TextComprehension.Models;
 
 public class Option
 {
-    public IReadOnlyList<string> Actions { get; init; } = Array.Empty<string>();
+    public Action Action { get; init; } = new(string.Empty);
+    public IReadOnlyList<Argument> Arguments { get; init; } = Array.Empty<Argument>();
+    public bool CanHaveTarget { get; init; }
 }

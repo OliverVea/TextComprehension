@@ -1,5 +1,3 @@
-using TextComprehension.Interfaces;
-
 namespace TextComprehension.Models;
 
 public class ChoiceResult

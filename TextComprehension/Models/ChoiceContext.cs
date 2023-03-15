@@ -1,8 +1,7 @@
-using TextComprehension.Interfaces;
-
 namespace TextComprehension.Models;
 
 public class ChoiceContext
 {
-    public IEnumerable<Option> GlobalActions { get; init; } = Array.Empty<Option>();
+    public IEnumerable<Option> Options { get; init; } = Array.Empty<Option>();
+    public IEnumerable<Target> Targets { get; init; } = Array.Empty<Target>();
 }
