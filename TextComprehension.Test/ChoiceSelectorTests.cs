@@ -1,15 +1,16 @@
 using TextComprehension.Interfaces;
 using TextComprehension.Logic;
 using TextComprehension.Models;
-using Action = TextComprehension.Models.Action;
+using TextComprehension.Test.Helpers;
 
 namespace TextComprehension.Test;
 
 public class ChoiceSelectorTests
 {
-    private readonly IChoiceSelector _choiceSelector;
+    private IChoiceSelector _choiceSelector = null!;
 
-    public ChoiceSelectorTests()
+    [SetUp]
+    public void CreateChoiceSelector()
     {
         _choiceSelector = new ChoiceSelector();
     }
@@ -29,7 +30,7 @@ public class ChoiceSelectorTests
     {
         // Arrange
         var actions = new[] { "look around", "watch surroundings", "observe" };
-        var options = actions.Select(x => new Option { Action = GetAction(x) }).ToArray();
+        var options = actions.Select(x => new Option { Action = ModelHelper.GetAction(x) }).ToArray();
         
         var context = new ChoiceContext { Options = options };
         
@@ -49,8 +50,8 @@ public class ChoiceSelectorTests
     public void GetChoices_MultipleGlobalCommands_CorrectCommandIsReturned(string command, int count, bool matches)
     {
         // Arrange
-        var optionWalk = new Option { Action = GetAction("walk") };
-        var optionLook = new Option { Action = GetAction("look") };
+        var optionWalk = new Option { Action = ModelHelper.GetAction("walk") };
+        var optionLook = new Option { Action = ModelHelper.GetAction("look") };
         
         var context = new ChoiceContext
         {
@@ -74,8 +75,8 @@ public class ChoiceSelectorTests
     public void GetChoices_GlobalCommandWithArguments_OnlyReturnsCommandWithValidArgument(string command, bool matches)
     {
         // Arrange
-        var action = GetAction("walk");
-        var arguments = GetArguments("north", "south", "east", "west");
+        var action = ModelHelper.GetAction("walk");
+        var arguments = ModelHelper.GetArguments("north", "south", "east", "west");
         var optionWalk = new Option { Action = action, Arguments = arguments };
         
         var context = new ChoiceContext
@@ -94,8 +95,8 @@ public class ChoiceSelectorTests
     public void GetChoices_GlobalCommandWithArguments_ReturnsArgumentWhenMatched(string command, string argument)
     {
         // Arrange
-        var action = GetAction("walk");
-        var arguments = GetArguments("north", "south", "east", "west");
+        var action = ModelHelper.GetAction("walk");
+        var arguments = ModelHelper.GetArguments("north", "south", "east", "west");
         var optionWalk = new Option { Action = action, Arguments = arguments };
         
         var context = new ChoiceContext
@@ -119,11 +120,11 @@ public class ChoiceSelectorTests
         {
             Options = new[]
             {
-                new Option { Action = GetAction("use key on"), CanHaveTarget = true },
-                new Option { Action = GetAction("use door on"), CanHaveTarget = true },
-                new Option { Action = GetAction("look up"), CanHaveTarget = false },
+                new Option { Action = ModelHelper.GetAction("use key on"), CanHaveTarget = true },
+                new Option { Action = ModelHelper.GetAction("use door on"), CanHaveTarget = true },
+                new Option { Action = ModelHelper.GetAction("look up"), CanHaveTarget = false },
             },
-            Targets = GetTargets("key", "door")
+            Targets = ModelHelper.GetTargets("key", "door")
         };
         
         // Act
@@ -146,9 +147,9 @@ public class ChoiceSelectorTests
         {
             Options = new[]
             {
-                new Option { Action = GetAction("walk") }
+                new Option { Action = ModelHelper.GetAction("walk") }
             },
-            Targets = GetTargets("door")
+            Targets = ModelHelper.GetTargets("door")
         };
         
         // Act
@@ -156,20 +157,5 @@ public class ChoiceSelectorTests
         
         // Assert
         Assert.IsEmpty(result.Choices);
-    }
-
-    private static Action GetAction(string action)
-    {
-        return new Action(action);
-    }
-
-    private static Argument[] GetArguments(params string[] arguments)
-    {
-        return arguments.Select(x => new Argument(x)).ToArray();
-    }
-
-    private static Target[] GetTargets(params string[] targets)
-    {
-        return targets.Select(x => new Target(x)).ToArray();
     }
 }
