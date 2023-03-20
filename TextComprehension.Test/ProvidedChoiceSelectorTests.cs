@@ -46,6 +46,18 @@ public class ProvidedChoiceSelectorTests
     }
 
     [Test]
+    public void AddTargetProvider_WithProvider_Succeeds()
+    {
+        // Arrange
+        var targetProvider = MockHelper.MockTargetProvider();
+
+        // Act
+        Assert.DoesNotThrow(() => _choiceSelector.AddTargetProvider(targetProvider));
+
+        // Assert
+    }
+
+    [Test]
     public void GetChoices_WithProviders_UsesProviders()
     {
         // Arrange
@@ -71,17 +83,5 @@ public class ProvidedChoiceSelectorTests
             It.Is<string>(x => x == command),
             It.Is<ChoiceContext>(x => AssertionHelper.AssertEquals(option, x.Options.Single()) &&
                                       AssertionHelper.AssertEquals(target, x.Targets.Single()))));
-    }
-
-    [Test]
-    public void AddTargetProvider_WithProvider_Succeeds()
-    {
-        // Arrange
-        var targetProvider = MockHelper.MockTargetProvider();
-
-        // Act
-        Assert.DoesNotThrow(() => _choiceSelector.AddTargetProvider(targetProvider));
-
-        // Assert
     }
 }
