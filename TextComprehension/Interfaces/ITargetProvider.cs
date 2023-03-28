@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using TextComprehension.Models;
 
-namespace TextComprehension.Interfaces;
-
-public interface ITargetProvider
+namespace TextComprehension.Interfaces
 {
-    IEnumerable<Target> GetTargets();
+    public interface ITargetProvider
+    {
+        IEnumerable<Target> GetTargets();
+    }
 }

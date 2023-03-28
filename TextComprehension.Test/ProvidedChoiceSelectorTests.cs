@@ -1,87 +1,90 @@
-﻿using Moq;
-
+﻿using System.Linq;
+using Moq;
+using NUnit.Framework;
 using TextComprehension.Interfaces;
 using TextComprehension.Logic;
 using TextComprehension.Models;
 using TextComprehension.Test.Helpers;
 using AssertionHelper = TextComprehension.Test.Helpers.AssertionHelper;
+using Action = TextComprehension.Models.Action;
 
-namespace TextComprehension.Test;
-
-public class ProvidedChoiceSelectorTests
+namespace TextComprehension.Test
 {
-    private Mock<IChoiceSelector> _mockedChoiceSelector = null!;
-    private IProvidedChoiceSelector _choiceSelector = null!;
-
-    [SetUp]
-    public void CreateChoiceSelector()
+    public class ProvidedChoiceSelectorTests
     {
-        _mockedChoiceSelector = new Mock<IChoiceSelector>();
-        _choiceSelector = new ProvidedChoiceSelector(_mockedChoiceSelector.Object);
-    }
+        private Mock<IChoiceSelector> _mockedChoiceSelector = null!;
+        private IProvidedChoiceSelector _choiceSelector = null!;
 
-    [Test]
-    public void GetChoices_NoProviders_EmptyResult()
-    {
-        // Arrange
-        
-        // Act
-        var result = _choiceSelector.GetChoices(string.Empty);
-        
-        // Assert
-        Assert.IsNotNull(result);
-        Assert.IsEmpty(result.Choices);
-    }
-
-    [Test]
-    public void AddOptionProvider_WithProvider_Succeeds()
-    {
-        // Arrange
-        var choiceProvider = MockHelper.MockOptionProvider();
-
-        // Act
-        Assert.DoesNotThrow(() => _choiceSelector.AddOptionProvider(choiceProvider));
-
-        // Assert
-    }
-
-    [Test]
-    public void AddTargetProvider_WithProvider_Succeeds()
-    {
-        // Arrange
-        var targetProvider = MockHelper.MockTargetProvider();
-
-        // Act
-        Assert.DoesNotThrow(() => _choiceSelector.AddTargetProvider(targetProvider));
-
-        // Assert
-    }
-
-    [Test]
-    public void GetChoices_WithProviders_UsesProviders()
-    {
-        // Arrange
-        const string command = "build";
-
-        var option = new Option
+        [SetUp]
+        public void CreateChoiceSelector()
         {
-            Action = ModelHelper.GetAction(command)
-        };
-        var target = ModelHelper.GetTargets("target").Single();
+            _mockedChoiceSelector = new Mock<IChoiceSelector>();
+            _choiceSelector = new ProvidedChoiceSelector(_mockedChoiceSelector.Object);
+        }
 
-        var mockedOptionProvider = MockHelper.MockOptionProvider(option);
-        var mockedTargetProvider = MockHelper.MockTargetProvider(target);
+        [Test]
+        public void GetChoices_NoProviders_EmptyResult()
+        {
+            // Arrange
+            
+            // Act
+            var result = _choiceSelector.GetChoices(string.Empty);
+            
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsEmpty(result.Choices);
+        }
 
-        _choiceSelector.AddOptionProvider(mockedOptionProvider);
-        _choiceSelector.AddTargetProvider(mockedTargetProvider);
+        [Test]
+        public void AddOptionProvider_WithProvider_Succeeds()
+        {
+            // Arrange
+            var choiceProvider = MockHelper.MockOptionProvider();
 
-        // Act
-        _choiceSelector.GetChoices(command);
+            // Act
+            Assert.DoesNotThrow(() => _choiceSelector.AddOptionProvider(choiceProvider));
 
-        // Assert
-        _mockedChoiceSelector.Verify(x => x.GetChoices(
-            It.Is<string>(x => x == command),
-            It.Is<ChoiceContext>(x => AssertionHelper.AssertEquals(option, x.Options.Single()) &&
-                                      AssertionHelper.AssertEquals(target, x.Targets.Single()))));
+            // Assert
+        }
+
+        [Test]
+        public void AddTargetProvider_WithProvider_Succeeds()
+        {
+            // Arrange
+            var targetProvider = MockHelper.MockTargetProvider();
+
+            // Act
+            Assert.DoesNotThrow(() => _choiceSelector.AddTargetProvider(targetProvider));
+
+            // Assert
+        }
+
+        [Test]
+        public void GetChoices_WithProviders_UsesProviders()
+        {
+            // Arrange
+            const string command = "build";
+
+            var option = new Option
+            {
+                Action = new Action(command)
+            };
+            var target = ModelHelper.GetTargets("target").Single();
+
+            var mockedOptionProvider = MockHelper.MockOptionProvider(option);
+            var mockedTargetProvider = MockHelper.MockTargetProvider(target);
+
+            _choiceSelector.AddOptionProvider(mockedOptionProvider);
+            _choiceSelector.AddTargetProvider(mockedTargetProvider);
+
+            // Act
+            _choiceSelector.GetChoices(command);
+
+            // Assert
+            _mockedChoiceSelector.Verify(x => x.GetChoices(
+                It.Is<string>(x => x == command),
+                It.Is<ChoiceContext>(x => AssertionHelper.AssertEquals(option, x.Options.Single()) &&
+                                          AssertionHelper.AssertEquals(target, x.Targets.Single()))));
+        }
     }
 }

@@ -1,6 +1,10 @@
-namespace TextComprehension.Models;
+using System;
+using System.Collections.Generic;
 
-public class ChoiceResult
+namespace TextComprehension.Models
 {
-    public IEnumerable<Choice> Choices { get; init; } = Array.Empty<Choice>();
+    public class ChoiceResult
+    {
+        public IEnumerable<Choice> Choices { get; set; } = Array.Empty<Choice>();
+    }
 }

@@ -1,8 +1,10 @@
-namespace TextComprehension.Models;
-
-public class Choice
+namespace TextComprehension.Models
 {
-    public Option Option { get; init; } = new();
-    public Argument Argument { get; init; } = new(string.Empty);
-    public Target Target { get; init; } = new(string.Empty);
+    public class Choice
+    {
+        public Option Option { get; set; } = new Option();
+        public Argument Argument { get; set; } = Argument.Default;
+        public Target Target { get; set; } = Target.Default;
+    }
 }
+

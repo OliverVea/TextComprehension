@@ -1,43 +1,46 @@
-﻿using TextComprehension.Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TextComprehension.Interfaces;
 using TextComprehension.Models;
 
-namespace TextComprehension.Logic;
-
-public class ProvidedChoiceSelector : IProvidedChoiceSelector
+namespace TextComprehension.Logic
 {
-    private readonly IChoiceSelector _choiceSelector;
-
-    private readonly HashSet<IOptionProvider> _optionProviders = new HashSet<IOptionProvider>();
-    private readonly HashSet<ITargetProvider> _targetProviders = new HashSet<ITargetProvider>();
-
-    public ProvidedChoiceSelector(IChoiceSelector choiceSelector)
+    public class ProvidedChoiceSelector : IProvidedChoiceSelector
     {
-        _choiceSelector = choiceSelector;
-    }
+        private readonly IChoiceSelector _choiceSelector;
 
-    public void AddOptionProvider(IOptionProvider choiceProvider)
-    {
-        _optionProviders.Add(choiceProvider);
-    }
+        private readonly HashSet<IOptionProvider> _optionProviders = new HashSet<IOptionProvider>();
+        private readonly HashSet<ITargetProvider> _targetProviders = new HashSet<ITargetProvider>();
 
-    public void AddTargetProvider(ITargetProvider targetProvider)
-    {
-        _targetProviders.Add(targetProvider);
-    }
-
-    public ChoiceResult GetChoices(string command)
-    {
-        if (!_optionProviders.Any()) return new ChoiceResult();
-
-        var options = _optionProviders.SelectMany(x => x.GetOptions());
-        var targets = _targetProviders.SelectMany(x => x.GetTargets());
-
-        var context = new ChoiceContext
+        public ProvidedChoiceSelector(IChoiceSelector choiceSelector)
         {
-            Options = options,
-            Targets = targets
-        };
+            _choiceSelector = choiceSelector;
+        }
 
-        return _choiceSelector.GetChoices(command, context);
+        public void AddOptionProvider(IOptionProvider choiceProvider)
+        {
+            _optionProviders.Add(choiceProvider);
+        }
+
+        public void AddTargetProvider(ITargetProvider targetProvider)
+        {
+            _targetProviders.Add(targetProvider);
+        }
+
+        public ChoiceResult GetChoices(string command)
+        {
+            if (!_optionProviders.Any()) return new ChoiceResult();
+
+            var options = _optionProviders.SelectMany(x => x.GetOptions());
+            var targets = _targetProviders.SelectMany(x => x.GetTargets());
+
+            var context = new ChoiceContext
+            {
+                Options = options,
+                Targets = targets
+            };
+
+            return _choiceSelector.GetChoices(command, context);
+        }
     }
 }

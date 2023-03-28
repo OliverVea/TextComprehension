@@ -1,10 +1,11 @@
 ﻿using TextComprehension.Models;
 
-namespace TextComprehension.Interfaces;
-
-public interface IProvidedChoiceSelector
+namespace TextComprehension.Interfaces
 {
-    void AddOptionProvider(IOptionProvider choiceProvider);
-    void AddTargetProvider(ITargetProvider targetProvider);
-    ChoiceResult GetChoices(string command);
+    public interface IProvidedChoiceSelector
+    {
+        void AddOptionProvider(IOptionProvider choiceProvider);
+        void AddTargetProvider(ITargetProvider targetProvider);
+        ChoiceResult GetChoices(string command);
+    }
 }

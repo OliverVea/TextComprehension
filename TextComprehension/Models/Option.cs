@@ -1,8 +1,12 @@
-namespace TextComprehension.Models;
+using System;
+using System.Collections.Generic;
 
-public class Option
+namespace TextComprehension.Models
 {
-    public Action Action { get; init; } = new(string.Empty);
-    public IReadOnlyList<Argument> Arguments { get; init; } = Array.Empty<Argument>();
-    public bool CanHaveTarget { get; init; }
+    public class Option
+    {
+        public Action Action { get; set; } = Action.Default;
+        public IReadOnlyList<Argument> Arguments { get; set; } = Array.Empty<Argument>();
+        public bool CanHaveTarget { get; set; }
+    }
 }

@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using TextComprehension.Models;
 
-namespace TextComprehension.Interfaces;
-
-public interface IOptionProvider
+namespace TextComprehension.Interfaces
 {
-    IEnumerable<Option> GetOptions();
+    public interface IOptionProvider
+    {
+        IEnumerable<Option> GetOptions();
+    }
 }

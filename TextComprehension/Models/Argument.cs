@@ -1,3 +1,12 @@
-﻿namespace TextComprehension.Models;
+﻿namespace TextComprehension.Models
+{
+    public class Argument : ValueBase
+    {
+        public static readonly Argument Default = new Argument(string.Empty);
 
-public record Argument(string Value);
+        public Argument(string value) : base(value)
+        {
+        }
+    }
+}
+

@@ -1,7 +1,11 @@
-namespace TextComprehension.Models;
+using System;
+using System.Collections.Generic;
 
-public class ChoiceContext
+namespace TextComprehension.Models
 {
-    public IEnumerable<Option> Options { get; init; } = Array.Empty<Option>();
-    public IEnumerable<Target> Targets { get; init; } = Array.Empty<Target>();
+    public class ChoiceContext
+    {
+        public IEnumerable<Option> Options { get; set; } = Array.Empty<Option>();
+        public IEnumerable<Target> Targets { get; set; } = Array.Empty<Target>();
+    }
 }

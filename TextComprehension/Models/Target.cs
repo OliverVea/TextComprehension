@@ -1,3 +1,11 @@
-﻿namespace TextComprehension.Models;
+﻿namespace TextComprehension.Models
+{
+    public class Target : ValueBase
+    {
+        public static readonly Target Default = new Target(string.Empty);
 
-public record Target(string Value);
+        public Target(string value) : base(value)
+        {
+        }
+    }
+}

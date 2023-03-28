@@ -1,3 +1,11 @@
-﻿namespace TextComprehension.Models;
+﻿namespace TextComprehension.Models
+{
+    public class Action : ValueBase
+    {
+        public static readonly Action Default = new Action(string.Empty);
 
-public record Action(string Value);
+        public Action(string value) : base(value)
+        {
+        }
+    }
+}

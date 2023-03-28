@@ -1,8 +1,9 @@
 using TextComprehension.Models;
 
-namespace TextComprehension.Interfaces;
-
-public interface IChoiceSelector
+namespace TextComprehension.Interfaces
 {
-    ChoiceResult GetChoices(string command, ChoiceContext context);
+    public interface IChoiceSelector
+    {
+        ChoiceResult GetChoices(string command, ChoiceContext context);
+    }
 }
