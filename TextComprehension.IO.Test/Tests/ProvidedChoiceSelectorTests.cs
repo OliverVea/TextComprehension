@@ -1,5 +1,4 @@
 ﻿using Moq;
-using NUnit.Framework;
 using TextComprehension.IO.Interfaces;
 using TextComprehension.IO.Logic;
 using TextComprehension.IO.Models;
@@ -7,7 +6,7 @@ using TextComprehension.IO.Test.Helpers;
 using AssertionHelper = TextComprehension.IO.Test.Helpers.AssertionHelper;
 using Action = TextComprehension.IO.Models.Action;
 
-namespace TextComprehension.IO.Test
+namespace TextComprehension.IO.Test.Tests
 {
     public class ProvidedChoiceSelectorTests
     {

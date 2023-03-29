@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using TextComprehension.IO.Models;
 
 namespace TextComprehension.IO.Test.Helpers
