@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TextComprehension.Interfaces;
-using TextComprehension.Models;
+using TextComprehension.IO.Interfaces;
+using TextComprehension.IO.Models;
 
-namespace TextComprehension.Logic
+namespace TextComprehension.IO.Logic
 {
     public class ProvidedChoiceSelector : IProvidedChoiceSelector
     {

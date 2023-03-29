@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TextComprehension.Models
+namespace TextComprehension.IO.Models
 {
     public class ChoiceResult
     {

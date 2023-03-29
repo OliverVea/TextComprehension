@@ -1,12 +1,11 @@
-using System.Linq;
 using NUnit.Framework;
-using TextComprehension.Interfaces;
-using TextComprehension.Logic;
-using TextComprehension.Models;
-using TextComprehension.Test.Helpers;
-using Action = TextComprehension.Models.Action;
+using TextComprehension.IO.Interfaces;
+using TextComprehension.IO.Logic;
+using TextComprehension.IO.Models;
+using TextComprehension.IO.Test.Helpers;
+using Action = TextComprehension.IO.Models.Action;
 
-namespace TextComprehension.Test
+namespace TextComprehension.IO.Test
 {
     public class ChoiceSelectorTests
     {

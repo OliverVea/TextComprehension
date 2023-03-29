@@ -1,8 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComprehension.Test", "TextComprehension.Test\TextComprehension.Test.csproj", "{E16369A7-5184-416B-B2B7-D44B2680F3B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComprehension.IO.Test", "TextComprehension.IO.Test\TextComprehension.IO.Test.csproj", "{E16369A7-5184-416B-B2B7-D44B2680F3B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComprehension", "TextComprehension\TextComprehension.csproj", "{4F7FC841-3008-4FC6-8906-1FC53A33867C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComprehension.IO", "TextComprehension.IO\TextComprehension.IO.csproj", "{4F7FC841-3008-4FC6-8906-1FC53A33867C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComprehension.Level", "TextComprehension.Level\TextComprehension.Level.csproj", "{BBA49FB7-A3E3-4F4E-895D-BB37318E83DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComprehension.Level.Test", "TextComprehension.Level.Test\TextComprehension.Level.Test.csproj", "{2879B58C-D3E9-4E2C-9DA3-DF98CD129C9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +22,13 @@ Global
 		{4F7FC841-3008-4FC6-8906-1FC53A33867C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F7FC841-3008-4FC6-8906-1FC53A33867C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F7FC841-3008-4FC6-8906-1FC53A33867C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBA49FB7-A3E3-4F4E-895D-BB37318E83DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA49FB7-A3E3-4F4E-895D-BB37318E83DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA49FB7-A3E3-4F4E-895D-BB37318E83DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA49FB7-A3E3-4F4E-895D-BB37318E83DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2879B58C-D3E9-4E2C-9DA3-DF98CD129C9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2879B58C-D3E9-4E2C-9DA3-DF98CD129C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2879B58C-D3E9-4E2C-9DA3-DF98CD129C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2879B58C-D3E9-4E2C-9DA3-DF98CD129C9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

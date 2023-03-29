@@ -1,4 +1,4 @@
-﻿namespace TextComprehension.Models
+﻿namespace TextComprehension.IO.Models
 {
     public class Target : ValueBase
     {

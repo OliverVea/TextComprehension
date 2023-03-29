@@ -1,14 +1,13 @@
-﻿using System.Linq;
-using Moq;
+﻿using Moq;
 using NUnit.Framework;
-using TextComprehension.Interfaces;
-using TextComprehension.Logic;
-using TextComprehension.Models;
-using TextComprehension.Test.Helpers;
-using AssertionHelper = TextComprehension.Test.Helpers.AssertionHelper;
-using Action = TextComprehension.Models.Action;
+using TextComprehension.IO.Interfaces;
+using TextComprehension.IO.Logic;
+using TextComprehension.IO.Models;
+using TextComprehension.IO.Test.Helpers;
+using AssertionHelper = TextComprehension.IO.Test.Helpers.AssertionHelper;
+using Action = TextComprehension.IO.Models.Action;
 
-namespace TextComprehension.Test
+namespace TextComprehension.IO.Test
 {
     public class ProvidedChoiceSelectorTests
     {

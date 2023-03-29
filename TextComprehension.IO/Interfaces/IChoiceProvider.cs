@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using TextComprehension.Models;
+using TextComprehension.IO.Models;
 
-namespace TextComprehension.Interfaces
+namespace TextComprehension.IO.Interfaces
 {
     public interface IOptionProvider
     {

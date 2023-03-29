@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TextComprehension.Interfaces;
-using TextComprehension.Models;
+using TextComprehension.IO.Interfaces;
+using TextComprehension.IO.Models;
 
-namespace TextComprehension.Logic
+namespace TextComprehension.IO.Logic
 {
-    internal sealed class ChoiceSelector : IChoiceSelector
+    public class ChoiceSelector : IChoiceSelector
     {
         public ChoiceResult GetChoices(string command, ChoiceContext context)
         {

@@ -1,7 +1,7 @@
 using NUnit.Framework;
-using TextComprehension.Models;
+using TextComprehension.IO.Models;
 
-namespace TextComprehension.Test.Helpers
+namespace TextComprehension.IO.Test.Helpers
 {
     internal static class AssertionHelper {
         public static bool AssertEquals(Option expected, Option actual) {

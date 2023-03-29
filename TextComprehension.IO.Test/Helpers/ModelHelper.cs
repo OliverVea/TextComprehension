@@ -1,7 +1,6 @@
-using System.Linq;
-using TextComprehension.Models;
+using TextComprehension.IO.Models;
 
-namespace TextComprehension.Test.Helpers
+namespace TextComprehension.IO.Test.Helpers
 {
     public static class ModelHelper {
 
