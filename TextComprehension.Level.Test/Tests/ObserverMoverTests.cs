@@ -20,182 +20,124 @@ public class ObserverMoverTests
         Assert.That(_observerMover, Is.Not.Null);
     }
 
-    [TestCase(0, 0, 1, Description = "Center - Turns correctly")]
-    [TestCase(0, 7, 0, Description = "Center - Wraps around")]
-    [TestCase(1, 0, 1, Description = "Ring - Turns correctly")]
-    [TestCase(1, 3, 0, Description = "Ring - Wraps around")]
-    public void TurnRight_VariousConfigurations_TurnsCorrectly(int ring, int currentHeading, int expectedHeading)
+    private static object[][] _testCases = 
+    {
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Outward, Ring = 1, Spur = 0 },
+            Movement.Forward,
+            new ObserverState { Heading = Heading.Outward, Ring = 2, Spur = 0 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Outward, Ring = 2, Spur = 0 },
+            Movement.Forward,
+            new ObserverState { Heading = Heading.Outward, Ring = 2, Spur = 0 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Inward, Ring = 1, Spur = 0 },
+            Movement.Forward,
+            new ObserverState { Heading = Heading.Inward, Ring = 0, Spur = 0 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Inward, Ring = 0, Spur = 0 },
+            Movement.Forward,
+            new ObserverState { Heading = Heading.Inward, Ring = 0, Spur = 0 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Clockwise, Ring = 1, Spur = 0 },
+            Movement.Forward,
+            new ObserverState { Heading = Heading.Clockwise, Ring = 1, Spur = 1 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Clockwise, Ring = 1, Spur = 7 },
+            Movement.Forward,
+            new ObserverState { Heading = Heading.Clockwise, Ring = 1, Spur = 0 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Counterclockwise, Ring = 1, Spur = 0 },
+            Movement.Forward,
+            new ObserverState { Heading = Heading.Counterclockwise, Ring = 1, Spur = 7 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Counterclockwise, Ring = 1, Spur = 1 },
+            Movement.Forward,
+            new ObserverState { Heading = Heading.Counterclockwise, Ring = 1, Spur = 0 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Outward, Ring = 1, Spur = 0 },
+            Movement.Backward,
+            new ObserverState { Heading = Heading.Outward, Ring = 0, Spur = 0 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Outward, Ring = 0, Spur = 0 },
+            Movement.Backward,
+            new ObserverState { Heading = Heading.Outward, Ring = 0, Spur = 0 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Inward, Ring = 0, Spur = 0 },
+            Movement.Backward,
+            new ObserverState { Heading = Heading.Inward, Ring = 1, Spur = 0 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Inward, Ring = 2, Spur = 0 },
+            Movement.Backward,
+            new ObserverState { Heading = Heading.Inward, Ring = 2, Spur = 0 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Clockwise, Ring = 1, Spur = 1 },
+            Movement.Backward,
+            new ObserverState { Heading = Heading.Clockwise, Ring = 1, Spur = 0 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Clockwise, Ring = 1, Spur = 0 },
+            Movement.Backward,
+            new ObserverState { Heading = Heading.Clockwise, Ring = 1, Spur = 7 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Counterclockwise, Ring = 1, Spur = 0 },
+            Movement.Backward,
+            new ObserverState { Heading = Heading.Counterclockwise, Ring = 1, Spur = 1 }
+        },
+        new object[]
+        {
+            new ObserverState { Heading = Heading.Counterclockwise, Ring = 1, Spur = 7 },
+            Movement.Backward,
+            new ObserverState { Heading = Heading.Counterclockwise, Ring = 1, Spur = 0 }
+        }
+    };
+
+    [TestCaseSource(nameof(_testCases))]
+    public void Move_WithTestCases_ReturnsCorrectState(ObserverState initialState, Movement movement, ObserverState expectedState)
     {
         // Arrange
-        var state = new ObserverState
-        {
-            Ring = ring,
-            Heading = currentHeading
-        };
         
         // Act
-        var actualState = _observerMover.TurnRight(ExampleScene, state);
-
-        // Assert
-        Assert.That(actualState.Heading, Is.EqualTo(expectedHeading));
-    }
-
-    [TestCase(0, 1, Description = "Center - Turns correctly")]
-    [TestCase(7, 0, Description = "Center - Wraps around")]
-    public void TurnRight_InCenter_UpdatesSpurCorrectly(int currentSpur, int expectedSpur)
-    {
-        // Arrange
-        var state = new ObserverState
-        {
-            Spur = currentSpur,
-            Heading = currentSpur
-        };
+        var actual = _observerMover.Move(ExampleScene, initialState, movement);
         
-        // Act
-        var actualState = _observerMover.TurnRight(ExampleScene, state);
-
         // Assert
-        Assert.That(actualState.Spur, Is.EqualTo(expectedSpur));
-    }
-
-    [TestCase(0, 0)]
-    [TestCase(7, 7)]
-    public void TurnRight_OnRing_SpurIsNotUpdated(int currentSpur, int expectedSpur)
-    {
-        // Arrange
-        var state = new ObserverState
-        {
-            Ring = 1,
-            Spur = currentSpur,
-            Heading = currentSpur
-        };
-        
-        // Act
-        var actualState = _observerMover.TurnRight(ExampleScene, state);
-
-        // Assert
-        Assert.That(actualState.Spur, Is.EqualTo(expectedSpur));
-    }
-
-    [TestCase(0, 1, 0, Description = "Center - Turns correctly")]
-    [TestCase(0, 0, 7, Description = "Center - Wraps around")]
-    [TestCase(1, 1, 0, Description = "Ring - Turns correctly")]
-    [TestCase(1, 0, 3, Description = "Ring - Wraps around")]
-    public void TurnLeft_VariousConfigurations_TurnsCorrectly(int ring, int currentHeading, int expectedHeading)
-    {
-        // Arrange
-        var state = new ObserverState
-        {
-            Ring = ring,
-            Heading = currentHeading
-        };
-        
-        // Act
-        var actualState = _observerMover.TurnLeft(ExampleScene, state);
-
-        // Assert
-        Assert.That(actualState.Heading, Is.EqualTo(expectedHeading));
-    }
-
-    [TestCase(1, 0, Description = "Center - Turns correctly")]
-    [TestCase(0, 7, Description = "Center - Wraps around")]
-    public void TurnLeft_InCenter_UpdatesSpurCorrectly(int currentSpur, int expectedSpur)
-    {
-        // Arrange
-        var state = new ObserverState
-        {
-            Spur = currentSpur,
-            Heading = currentSpur
-        };
-        
-        // Act
-        var actualState = _observerMover.TurnLeft(ExampleScene, state);
-
-        // Assert
-        Assert.That(actualState.Spur, Is.EqualTo(expectedSpur));
-    }
-
-    [TestCase(0, 0)]
-    [TestCase(7, 7)]
-    public void TurnLeft_OnRing_SpurIsNotUpdated(int currentSpur, int expectedSpur)
-    {
-        // Arrange
-        var state = new ObserverState
-        {
-            Ring = 1,
-            Spur = currentSpur,
-            Heading = currentSpur
-        };
-        
-        // Act
-        var actualState = _observerMover.TurnLeft(ExampleScene, state);
-
-        // Assert
-        Assert.That(actualState.Spur, Is.EqualTo(expectedSpur));
-    }
-
-    [TestCase(0, 0, 1, Description = "Center - Walks out one ring")]
-    [TestCase(1, 0, 2, Description = "Ring - Walks out another ring")]
-    [TestCase(2, 0, 2, Description = "Edge - Cannot walk further")]
-    public void MoveForward_MovingOutwards_MovesCorrectly(int ring, int currentHeading, int expectedRing)
-    {
-        // Arrange
-        var state = new ObserverState
-        {
-            Ring = ring,
-            Heading = currentHeading
-        };
-        
-        // Act
-        var actualState = _observerMover.MoveForward(ExampleScene, state);
-
-        // Assert
-        Assert.That(actualState.Ring, Is.EqualTo(expectedRing));
-    }
-
-    [TestCase(0, 2, 1, Description = "Center - Walks out one ring")]
-    [TestCase(1, 2, 0, Description = "Ring - Walks in to the center")]
-    [TestCase(2, 2, 1, Description = "Edge - Walks towards the center")]
-    public void MoveForward_MovingInwards_MovesCorrectly(int ring, int currentHeading, int expectedRing)
-    {
-        // Arrange
-        var state = new ObserverState
-        {
-            Ring = ring,
-            Heading = currentHeading
-        };
-        
-        // Act
-        var actualState = _observerMover.MoveForward(ExampleScene, state);
-
-        // Assert
-        Assert.That(actualState.Ring, Is.EqualTo(expectedRing));
+        Assert.That(actual.Ring, Is.EqualTo(expectedState.Ring));
+        Assert.That(actual.Spur, Is.EqualTo(expectedState.Spur));
+        Assert.That(actual.Heading, Is.EqualTo(expectedState.Heading));
     }
     
-    [TestCase(0, 1, 1)]
-    [TestCase(7, 1, 0)]
-    [TestCase(1, 3, 0)]
-    [TestCase(0, 3, 7)]
-    public void MoveForward_MovingAlongRing_MovesCorrectly(int spur, int currentHeading, int expectedSpur)
-    {
-        // Arrange
-        var state = new ObserverState
-        {
-            Ring = 1,
-            Spur = spur,
-            Heading = currentHeading
-        };
-        
-        // Act
-        var actualState = _observerMover.MoveForward(ExampleScene, state);
-
-        // Assert
-        Assert.That(actualState.Spur, Is.EqualTo(expectedSpur));
-    }
 
     private static readonly Scene ExampleScene = new()
     {
         Spurs = 8,
-        Rings = 2
+        Rings = 3
     };
 }
