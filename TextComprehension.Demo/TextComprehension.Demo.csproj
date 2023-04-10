@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\TextComprehension.ImageGeneration\TextComprehension.ImageGeneration.csproj" />
+        <ProjectReference Include="..\TextComprehension.IO\TextComprehension.IO.csproj" />
+        <ProjectReference Include="..\TextComprehension.Level\TextComprehension.Level.csproj" />
+    </ItemGroup>
+
+</Project>

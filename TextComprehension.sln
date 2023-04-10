@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComprehension.Level", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComprehension.Level.Test", "TextComprehension.Level.Test\TextComprehension.Level.Test.csproj", "{2879B58C-D3E9-4E2C-9DA3-DF98CD129C9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComprehension.Demo", "TextComprehension.Demo\TextComprehension.Demo.csproj", "{CF1B07A4-84F3-407B-BD55-592FE152427A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextComprehension.ImageGeneration", "TextComprehension.ImageGeneration\TextComprehension.ImageGeneration.csproj", "{BF6A383E-4492-4239-A053-205924EAB91D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{2879B58C-D3E9-4E2C-9DA3-DF98CD129C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2879B58C-D3E9-4E2C-9DA3-DF98CD129C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2879B58C-D3E9-4E2C-9DA3-DF98CD129C9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF1B07A4-84F3-407B-BD55-592FE152427A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF1B07A4-84F3-407B-BD55-592FE152427A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF1B07A4-84F3-407B-BD55-592FE152427A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF1B07A4-84F3-407B-BD55-592FE152427A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF6A383E-4492-4239-A053-205924EAB91D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF6A383E-4492-4239-A053-205924EAB91D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF6A383E-4492-4239-A053-205924EAB91D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF6A383E-4492-4239-A053-205924EAB91D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

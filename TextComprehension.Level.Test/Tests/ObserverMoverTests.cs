@@ -126,7 +126,7 @@ public class ObserverMoverTests
         // Arrange
         
         // Act
-        var actual = _observerMover.Move(ExampleScene, initialState, movement);
+        var actual = _observerMover.Move(Scene, initialState, movement);
         
         // Assert
         Assert.That(actual.Ring, Is.EqualTo(expectedState.Ring));
@@ -135,7 +135,7 @@ public class ObserverMoverTests
     }
     
 
-    private static readonly Scene ExampleScene = new()
+    private static readonly Scene Scene = new()
     {
         Spurs = 8,
         Rings = 3
